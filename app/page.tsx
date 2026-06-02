@@ -336,13 +336,18 @@ export default function Home() {
         <Chip>Open Source · MIT License · Built in Rust</Chip>
         <h1 style={{ color: C.warm }}
           className="text-5xl md:text-7xl font-bold tracking-tight leading-tight fade-up">
-          Your AI is being<br />
-          <span style={{ color: C.bright }}>manipulated.</span>
+          Don't let poisoned data<br />
+          <span style={{ color: C.bright }}>reach your LLM.</span>
         </h1>
         <p style={{ color: `${C.warm}70` }}
           className="max-w-xl text-lg leading-relaxed fade-up-delay-1">
-          Right now, somewhere in your RAG pipeline, a document is carrying hidden instructions.
-          Your LLM will follow them. You won't know until it's too late.
+          From user input to RAG chunks to tool outputs —
+          KIWI intercepts prompt injection at every stage of your AI pipeline.
+          <br /><br />
+          <span style={{ color: `${C.warm}50` }}>
+            No GPU. No cloud. 0.017ms per document.
+            Built for agents, edge devices, and everything in between.
+          </span>
         </p>
         <div className="flex gap-4 mt-2 fade-up-delay-2">
           <button onClick={scrollToDemo}
