@@ -333,7 +333,7 @@ export default function Home() {
 
       {/* ── Act 1: Hero ── */}
       <Section className="text-center flex flex-col items-center gap-6 pt-28 pb-20">
-        <Chip>Open Source · MIT License · Built in Rust</Chip>
+        <Chip>Open Source · MIT · Rust · pip install kiwi-skin</Chip>
         <h1 style={{ color: C.warm }}
           className="text-5xl md:text-7xl font-bold tracking-tight leading-tight fade-up">
           Don't let poisoned data<br />
@@ -403,11 +403,12 @@ export default function Home() {
               <div className="p-4 border-b border-l" style={{ borderColor: C.border, color: C.bright }}>KIWI</div>
             </div>
             {[
-              ["Speed",          "200 – 2000ms",  "0.017ms"],
-              ["GPU required",   "✓ Yes",          "✗ No"],
-              ["Works offline",  "✗ No",           "✓ Yes"],
-              ["Runs on mobile", "✗ No",           "✓ Yes"],
-              ["Cost per call",  "$$",             "Free"],
+              ["Speed",               "200 – 2000ms",  "0.017ms"],
+              ["GPU required",        "✓ Yes",          "✗ No"],
+              ["Works offline",       "✗ No",           "✓ Yes"],
+              ["Runs on mobile",      "✗ No",           "✓ Yes"],
+              ["RAG chunk scanning",  "✗ No",           "✓ Yes"],
+              ["Cost per call",       "$$",             "Free"],
             ].map(([label, bad, good]) => (
               <div key={label} className="grid grid-cols-3 text-sm" style={{ borderColor: C.border }}>
                 <div className="p-4 border-t border-r" style={{ borderColor: C.border, color: `${C.warm}60` }}>{label}</div>
@@ -582,7 +583,7 @@ export default function Home() {
             {[
               { val: "0.017ms", label: "avg per document", sub: "118× faster than 2ms target" },
               { val: "0",       label: "GPU required",     sub: "runs on any device" },
-              { val: "10/10",   label: "tests passing",    sub: "fully validated" },
+              { val: "19/19",   label: "tests passing",    sub: "fully validated" },
               { val: "< 2ms",   label: "even at 10 pages", sub: "enterprise doc sizes" },
             ].map((stat) => (
               <div key={stat.label} style={{ background: C.card, borderColor: C.border }}
@@ -636,9 +637,13 @@ export default function Home() {
           Start protecting your LLM.
         </h2>
         <p style={{ color: `${C.warm}50` }} className="max-w-md">
-          Open source. MIT license. Zero dependencies on cloud services.
-          Drop it in front of your RAG pipeline today.
+          Open source. MIT license. Zero GPU. Zero cloud.
+          Drop it in front of your agent pipeline today.
         </p>
+        <div style={{ color: C.bright, background: "rgba(141,182,0,0.06)", borderColor: C.border }}
+          className="border rounded-xl px-6 py-3 font-mono text-sm">
+          pip install kiwi-skin
+        </div>
         <div className="flex gap-4">
           <a href="https://github.com/willyliao777/KIWI" target="_blank" rel="noopener noreferrer"
             style={{ background: C.flesh, color: C.warm }}
