@@ -604,15 +604,15 @@ export default function Home() {
           <div className="text-center flex flex-col gap-3">
             <Chip>Who It's For</Chip>
             <h2 style={{ color: C.warm }} className="text-3xl md:text-4xl font-bold tracking-tight">
-              Built for the places<br />cloud guardrails can't reach.
+              If your AI reads external data,<br />you need KIWI.
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             {[
-              { icon: "🏥", title: "Finance & Healthcare",  desc: "Air-gapped systems running local LLMs. Data never leaves the building. Cloud guardrails are not an option." },
-              { icon: "📱", title: "Mobile & Edge AI",      desc: "On-device inference on smartphones and NPUs. Battery and latency constraints make LLM-based filters impossible." },
-              { icon: "🗄️", title: "RAG Pipelines",         desc: "Thousands of untrusted documents ingested daily. Clean at the source before poisoned content enters your vector database." },
-              { icon: "🤖", title: "AI Agents",             desc: "Agents that browse the web and read files. Any page could carry an injection targeting your agent's next action." },
+              { icon: "🤖", title: "AI Agent Developers",   desc: "Your agent reads web pages, emails, and documents. Any of them could carry hidden instructions. KIWI scans every chunk before your agent acts on it." },
+              { icon: "🗄️", title: "RAG Pipeline Teams",    desc: "Untrusted documents ingested at scale. One poisoned chunk can hijack your LLM's behavior for every user. Scan at ingest, scan at retrieval." },
+              { icon: "📱", title: "Edge & On-Device AI",   desc: "On-device inference on smartphones, NPUs, and embedded systems. No GPU, no cloud, no added latency — KIWI runs anywhere Rust runs." },
+              { icon: "🏥", title: "Finance & Healthcare",  desc: "Air-gapped systems where data never leaves the building. Cloud guardrails are not an option. KIWI works fully offline." },
             ].map((uc) => (
               <div key={uc.title} style={{ background: C.card, borderColor: C.border }}
                 className="rounded-2xl border p-6 flex gap-4">
