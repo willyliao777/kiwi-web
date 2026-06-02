@@ -467,8 +467,11 @@ export default function Home() {
           <div className="text-center flex flex-col gap-3">
             <Chip>How It Works</Chip>
             <h2 style={{ color: C.warm }} className="text-3xl md:text-4xl font-bold tracking-tight">
-              Two layers. Zero LLM.
+              Three layers. Zero LLM. Zero GPU.
             </h2>
+            <p style={{ color: `${C.warm}50` }} className="max-w-lg mx-auto text-sm leading-relaxed">
+              Pure Rust rule-based scanning — deterministic, auditable, and fast enough to sit in any hot path.
+            </p>
           </div>
 
           <div className="flex flex-col gap-4 w-full">
@@ -476,6 +479,7 @@ export default function Home() {
               {
                 num: "01",
                 title: "Unicode Sanitization",
+                tag: "All inputs",
                 items: [
                   "Strips hidden zero-width characters (U+200B, U+FEFF…) invisible to humans but visible to tokenizers",
                   "Maps cross-script homoglyph attacks — Cyrillic р (U+0440) looks identical to Latin p",
@@ -484,19 +488,36 @@ export default function Home() {
               },
               {
                 num: "02",
-                title: "Injection Neutralization",
+                title: "Direct Injection Neutralization",
+                tag: "User input",
                 items: [
                   "Detects [SYSTEM: ...], <script>, {{{override}}}, <|im_start|> and more",
-                  "Does NOT delete enclosed text — RAG factual content is preserved",
+                  "Does NOT delete enclosed text — factual content is preserved",
                   "Converts executive commands into harmless context-mentions the LLM cannot act on",
+                ],
+              },
+              {
+                num: "03",
+                title: "Indirect Injection Detection",
+                tag: "RAG chunks · Tool outputs",
+                items: [
+                  "Catches natural-language attacks hidden inside documents and web pages — \"ignore previous instructions\", \"new task:\", hidden HTML comments",
+                  "Designed for indirect prompt injection: attackers plant instructions in content your agent will ingest later",
+                  "Each chunk scanned independently — poisoned chunks blocked, clean chunks pass through untouched",
                 ],
               },
             ].map((layer) => (
               <div key={layer.num} style={{ background: C.card, borderColor: C.border }}
                 className="rounded-2xl border p-6 flex flex-col md:flex-row gap-6">
                 <div style={{ color: `${C.bright}40` }} className="text-5xl font-black shrink-0">{layer.num}</div>
-                <div className="flex flex-col gap-3">
-                  <div style={{ color: C.bright }} className="font-bold text-lg">{layer.title}</div>
+                <div className="flex flex-col gap-3 flex-1">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div style={{ color: C.bright }} className="font-bold text-lg">{layer.title}</div>
+                    <span style={{ color: `${C.flesh}`, borderColor: `${C.flesh}50`, background: `${C.flesh}12` }}
+                      className="text-xs px-2 py-0.5 rounded-full border font-mono">
+                      {layer.tag}
+                    </span>
+                  </div>
                   <ul className="flex flex-col gap-2">
                     {layer.items.map((item) => (
                       <li key={item} style={{ color: `${C.warm}65` }} className="text-sm leading-relaxed flex gap-2">
