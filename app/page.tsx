@@ -80,10 +80,13 @@ function Divider() {
 // ── label chip ───────────────────────────────────────────────────────────────
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span style={{ color: C.bright, borderColor: `${C.flesh}60`, background: `${C.flesh}12` }}
-      className="text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border">
-      {children}
-    </span>
+    <div className="flex items-center justify-center gap-3">
+      <div style={{ background: C.flesh, opacity: 0.4, height: "1px", width: "2rem" }} />
+      <span style={{ color: C.flesh }} className="text-base font-bold uppercase tracking-[0.18em]">
+        {children}
+      </span>
+      <div style={{ background: C.flesh, opacity: 0.4, height: "1px", width: "2rem" }} />
+    </div>
   );
 }
 
