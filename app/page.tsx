@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 
 // ── colour tokens ────────────────────────────────────────────────────────────
 const C = {
-  bright:    "#8DB600",
-  flesh:     "#5a8a00",
-  highlight: "#c8e66e",
+  bright:    "#5a8a00",
+  flesh:     "#4a7200",
+  highlight: "#8DB600",
   skin:      "#6B3F1B",
   skinLight: "#92400e",
-  warm:      "#f5f0e8",
-  card:      "#111009",
-  border:    "rgba(141,182,0,0.18)",
+  warm:      "#1a1a08",
+  card:      "#faf8f2",
+  border:    "rgba(74,114,0,0.22)",
 };
 
 // ── demo data ────────────────────────────────────────────────────────────────
@@ -567,7 +567,7 @@ export default function Home() {
     <main style={{ background: C.card, color: C.warm }} className="min-h-screen">
 
       {/* Nav */}
-      <nav style={{ borderColor: C.border }} className="border-b sticky top-0 z-50 backdrop-blur-md bg-[#111009cc]">
+      <nav style={{ borderColor: C.border }} className="border-b sticky top-0 z-50 backdrop-blur-md bg-[#faf8f2ee]">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-lg">
             <span>🥝</span>
