@@ -557,6 +557,52 @@ function Demo() {
   );
 }
 
+// ── FAQ ──────────────────────────────────────────────────────────────────────
+const FAQ_ITEMS = [
+  {
+    q: "Does it support streaming output scanning?",
+    a: "KIWI scans complete text buffers, not token streams. For LLM output scanning (Layer 4), buffer the full response first, then pass it to scan_llm_output() before delivering it downstream. At 0.017ms per scan the added latency is negligible. For earlier layers — user input, RAG chunks, tool outputs — scanning happens before the LLM ever sees the data, so streaming is irrelevant there.",
+  },
+  {
+    q: "What language bindings are supported?",
+    a: "Python is available today via pip install kiwi-skin. The core is written in Rust and compiles to a native extension. WASM compilation for Node.js or browser environments is technically feasible — community contributions welcome. Go and other language FFI bindings are on the roadmap.",
+  },
+  {
+    q: "Will it produce false positives on legitimate content?",
+    a: "KIWI uses deterministic pattern matching, not probabilistic scoring, so it only flags what it explicitly recognises: patterns like [SYSTEM:, <script>, zero-width Unicode characters, and known homoglyphs. These are structurally distinct from ordinary prose. When threats are found, the sanitiser neutralises the command structure and preserves the surrounding factual content.",
+  },
+  {
+    q: "Can I define my own detection rules?",
+    a: "Yes. The CustomRule API lets you define regex-based rules with named threat kinds. Pass them to scan_with_rules() or sanitize_with_rules() to extend detection beyond the built-in patterns.",
+  },
+  {
+    q: "Does it replace security audits or red-teaming?",
+    a: "No. KIWI is a fast first line of defence for known structural injection patterns. It does not catch novel semantic attacks, logic manipulation, or jailbreaks expressed in ordinary language. Use it alongside content policies, red-teaming, and LLM-level guardrails — not instead of them.",
+  },
+  {
+    q: "Which LLMs does it work with?",
+    a: "All of them. KIWI is model-agnostic — it runs on text before it reaches the LLM and on text after the LLM generates a response. It works with GPT-4, Claude, Gemini, Llama, Mistral, and any other model.",
+  },
+];
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderColor: C.border }} className="border-b last:border-b-0">
+      <button onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-5 text-left cursor-pointer gap-6">
+        <span style={{ color: C.warm }} className="font-semibold text-sm">{q}</span>
+        <span style={{ color: C.flesh }} className="shrink-0 text-xl leading-none select-none">{open ? "−" : "+"}</span>
+      </button>
+      {open && (
+        <p style={{ color: `${C.warm}60` }} className="text-sm leading-relaxed pb-5 fade-up">
+          {a}
+        </p>
+      )}
+    </div>
+  );
+}
+
 // ── main page ────────────────────────────────────────────────────────────────
 export default function Home() {
   const demoRef = useRef<HTMLDivElement>(null);
@@ -904,6 +950,26 @@ export default function Home() {
                   <p style={{ color: `${C.warm}60` }} className="text-sm leading-relaxed">{uc.desc}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      {/* ── FAQ ── */}
+      <Section>
+        <div className="flex flex-col items-center gap-10">
+          <div className="text-center flex flex-col gap-3">
+            <Chip>FAQ</Chip>
+            <h2 style={{ color: C.warm }} className="text-3xl md:text-4xl font-bold tracking-tight">
+              Common questions.
+            </h2>
+          </div>
+          <div style={{ borderColor: C.border, background: "rgba(141,182,0,0.02)" }}
+            className="w-full rounded-2xl border px-6">
+            {FAQ_ITEMS.map((item) => (
+              <FaqItem key={item.q} q={item.q} a={item.a} />
             ))}
           </div>
         </div>
