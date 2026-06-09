@@ -565,7 +565,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What language bindings are supported?",
-    a: "Python is available today via pip install kiwi-skin. The core is written in Rust and compiles to a native extension. WASM compilation for Node.js or browser environments is technically feasible — community contributions welcome. Go and other language FFI bindings are on the roadmap.",
+    a: "Python is the only official binding today, available via pip install kiwi-skin. The core is Rust — any language with C FFI can call it via the Rust C ABI, but there are no official Node.js or Go packages yet. If you need a binding for another language, open an issue on GitHub.",
   },
   {
     q: "Will it produce false positives on legitimate content?",
@@ -971,6 +971,23 @@ export default function Home() {
             {FAQ_ITEMS.map((item) => (
               <FaqItem key={item.q} q={item.q} a={item.a} />
             ))}
+            <div style={{ borderColor: C.border }} className="border-t py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <p style={{ color: `${C.warm}45` }} className="text-sm">
+                Still have questions?
+              </p>
+              <div className="flex gap-3">
+                <a href="https://github.com/willyliao777/KIWI/issues" target="_blank" rel="noopener noreferrer"
+                  style={{ borderColor: C.border, color: `${C.warm}55` }}
+                  className="text-xs px-4 py-2 rounded-lg border hover:border-[#5a8a00] hover:text-[#5a8a00] transition-colors">
+                  Open a GitHub issue →
+                </a>
+                <a href="mailto:liaowilly2003@gmail.com"
+                  style={{ borderColor: C.border, color: `${C.warm}55` }}
+                  className="text-xs px-4 py-2 rounded-lg border hover:border-[#5a8a00] hover:text-[#5a8a00] transition-colors">
+                  Send an email →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
