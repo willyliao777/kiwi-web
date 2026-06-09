@@ -645,40 +645,50 @@ export default function Home() {
 
       <Divider />
 
-      {/* ── Act 3: The Old Way ── */}
+      {/* ── Act 3: Two Approaches ── */}
       <Section>
         <div className="flex flex-col items-center gap-10">
           <div className="text-center flex flex-col gap-3">
-            <Chip>The Problem with Existing Solutions</Chip>
+            <Chip>Deterministic vs. Probabilistic</Chip>
             <h2 style={{ color: C.warm }} className="text-3xl md:text-4xl font-bold tracking-tight">
-              Too slow for the real world.
+              Two tools. Two different jobs.
             </h2>
+            <p style={{ color: `${C.warm}60` }} className="max-w-xl mx-auto leading-relaxed text-sm">
+              LLM-based classifiers understand nuanced language and context — at the cost of latency and compute.
+              KIWI is a deterministic rule-based filter: it catches structural injections in under 0.02ms on any device, with zero model inference.
+              They solve different problems. Here&apos;s the tradeoff.
+            </p>
           </div>
           <div style={{ borderColor: C.border, background: "rgba(141,182,0,0.04)" }}
             className="w-full rounded-2xl border overflow-hidden">
             <div className="grid grid-cols-3 text-xs font-semibold uppercase tracking-widest"
               style={{ borderColor: C.border, background: "rgba(141,182,0,0.08)", color: `${C.warm}50` }}>
               <div className="p-4 border-b" style={{ borderColor: C.border }}></div>
-              <div className="p-4 border-b border-l" style={{ borderColor: C.border }}>LlamaGuard</div>
+              <div className="p-4 border-b border-l" style={{ borderColor: C.border }}>LLM Classifier</div>
               <div className="p-4 border-b border-l" style={{ borderColor: C.border, color: C.bright }}>KIWI</div>
             </div>
             {[
-              ["Speed",                "200 – 2000ms",  "0.017ms"],
-              ["GPU required",         "✓ Yes",          "✗ No"],
-              ["Works offline",        "✗ No",           "✓ Yes"],
-              ["Runs on mobile",       "✗ No",           "✓ Yes"],
-              ["RAG chunk scanning",   "✗ No",           "✓ Yes"],
-              ["Tool output scanning", "✗ No",           "✓ Yes"],
-              ["LLM output scanning",  "✗ No",           "✓ Yes"],
-              ["Cost per call",        "$$",             "Free"],
-            ].map(([label, bad, good]) => (
+              ["Approach",             "Probabilistic (semantic)",   "Deterministic (rule-based)"],
+              ["Latency",              "100ms – 2s+",                "0.017ms"],
+              ["GPU required",         "Full model: yes",            "No"],
+              ["Works offline",        "With local model",           "Always"],
+              ["Runs on mobile / edge","Quantized only",             "Yes"],
+              ["RAG / tool scanning",  "General purpose",            "Purpose-built"],
+              ["Catches nuanced jailbreaks", "Yes",                  "Structural only"],
+              ["Cost per call",        "GPU compute or API",         "Free / open source"],
+            ].map(([label, neutral, good], i) => (
               <div key={label} className="grid grid-cols-3 text-sm" style={{ borderColor: C.border }}>
                 <div className="p-4 border-t border-r" style={{ borderColor: C.border, color: `${C.warm}60` }}>{label}</div>
-                <div className="p-4 border-t border-r" style={{ borderColor: C.border, color: "#f87171" }}>{bad}</div>
-                <div className="p-4 border-t" style={{ borderColor: C.border, color: C.bright }}>{good}</div>
+                <div className="p-4 border-t border-r" style={{ borderColor: C.border, color: i === 6 ? C.bright : `${C.warm}55` }}>{neutral}</div>
+                <div className="p-4 border-t" style={{ borderColor: C.border, color: i === 6 ? `${C.warm}45` : C.bright }}>{good}</div>
               </div>
             ))}
           </div>
+          <p style={{ color: `${C.warm}40` }} className="text-xs max-w-lg mx-auto text-center leading-relaxed">
+            Use KIWI to strip structural injections fast at every pipeline node.
+            Add an LLM classifier where semantic context matters.
+            Defense in depth beats picking one.
+          </p>
         </div>
       </Section>
 
