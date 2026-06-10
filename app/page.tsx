@@ -149,7 +149,7 @@ function LlmOutputDemo() {
 
   async function scan() {
     setLoading(true);
-    const res  = await fetch("/api/scan-llm-output", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ task, output }) });
+    const res  = await fetch("/api/scan-llm-output", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": process.env.NEXT_PUBLIC_KIWI_DEMO_KEY ?? "" }, body: JSON.stringify({ task, output }) });
     const data = await res.json();
     setResult(data);
     setLoading(false);
@@ -268,7 +268,7 @@ function ToolOutputDemo() {
 
   async function scan() {
     setLoading(true);
-    const res  = await fetch("/api/scan-tool-output", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ toolName, output }) });
+    const res  = await fetch("/api/scan-tool-output", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": process.env.NEXT_PUBLIC_KIWI_DEMO_KEY ?? "" }, body: JSON.stringify({ toolName, output }) });
     const data = await res.json();
     setResult(data);
     setLoading(false);
@@ -378,7 +378,7 @@ function RagChunksDemo() {
 
   async function scanChunks() {
     setLoading(true);
-    const res  = await fetch("/api/scan-chunks", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chunks }) });
+    const res  = await fetch("/api/scan-chunks", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": process.env.NEXT_PUBLIC_KIWI_DEMO_KEY ?? "" }, body: JSON.stringify({ chunks }) });
     const data = await res.json();
     setResults(data.results);
     setLoading(false);
@@ -481,7 +481,7 @@ function Demo() {
   async function scan() {
     if (!input.trim()) return;
     setLoading(true);
-    const res  = await fetch("/api/scan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: input }) });
+    const res  = await fetch("/api/scan", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": process.env.NEXT_PUBLIC_KIWI_DEMO_KEY ?? "" }, body: JSON.stringify({ text: input }) });
     const data = await res.json();
     setThreats(data.threats);
     setSanitized(data.sanitized);

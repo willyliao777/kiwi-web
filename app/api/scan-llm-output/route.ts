@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireApiKey } from "@/lib/auth";
 
 const ZERO_WIDTH_CHARS: Record<string, string> = {
   "​": "U+200B Zero Width Space",
@@ -112,6 +113,9 @@ function scanLlmOutput(originalTask: string, output: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const authError = await requireApiKey(req);
+  if (authError) return authError;
+
   const { task, output } = await req.json();
   if (typeof task !== "string" || typeof output !== "string")
     return NextResponse.json({ error: "task and output must be strings" }, { status: 400 });

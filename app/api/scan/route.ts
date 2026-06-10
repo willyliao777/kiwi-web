@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireApiKey } from "@/lib/auth";
 
 const ZERO_WIDTH_CHARS: Record<string, string> = {
   "​": "U+200B Zero Width Space",
@@ -81,6 +82,9 @@ function scanText(text: string): { threats: Threat[]; sanitized: string } {
 }
 
 export async function POST(req: NextRequest) {
+  const authError = await requireApiKey(req);
+  if (authError) return authError;
+
   const { text } = await req.json();
   if (!text || typeof text !== "string") {
     return NextResponse.json({ error: "text is required" }, { status: 400 });
